@@ -2,6 +2,8 @@ package com.example.batch.job;
 
 import com.example.batch.TestConfig;
 import com.example.batch.bean.SimpleTaskletBean;
+import com.example.batch.domain.Student;
+import com.example.batch.repository.StudentRepository;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;

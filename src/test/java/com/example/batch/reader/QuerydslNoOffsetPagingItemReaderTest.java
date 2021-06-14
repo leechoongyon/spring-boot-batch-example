@@ -98,4 +98,70 @@ public class QuerydslNoOffsetPagingItemReaderTest {
         Assert.assertThat(reader.read().getName(), is("test2"));
         Assert.assertNull(reader.read());
     }
+
+    @Test
+    public void GROUP_BY_ASC_테스트() throws Exception {
+        Member member = Member.builder()
+                .name("test1")
+                .build();
+        Member member2 = Member.builder()
+                .name("test2")
+                .build();
+        memberRepository.save(member);
+        memberRepository.save(member2);
+
+        QuerydslNoOffsetStringOptions<Member> options =
+                new QuerydslNoOffsetStringOptions<>(QMember.member.name, Expression.ASC);
+
+        // 데이터 2개니 1개씩만 읽기
+        int chunkSize = 1;
+
+        QuerydslNoOffsetPagingItemReader<Member> reader =
+                new QuerydslNoOffsetPagingItemReader<>(entityManagerFactory, chunkSize, options,
+                        queryFactory -> queryFactory
+                                .selectFrom(QMember.member)
+                                .groupBy(QMember.member.id)
+                );
+
+        reader.open(new ExecutionContext());
+
+        Assert.assertThat(reader.read().getName(), is("test1"));
+        Assert.assertThat(reader.read().getName(), is("test2"));
+        Assert.assertNull(reader.read());
+    }
+
+    /**
+     * ORDER BY 를 적용하면, querydsl 에 적용한게 먼저 적용되고 그 뒤에 Options 에 적용한 필드가 order by 적용됨.
+     * 그렇기에 NoOffSetPagingItemReader 가 실제로 적용되는지 안되는지는 test 해봐야할듯
+     * @throws Exception
+     */
+    @Test
+    public void GROUP_BY_PLUS_ORDER_BY_ASC_테스트() throws Exception {
+        Member member = Member.builder()
+                .name("test1")
+                .build();
+        Member member2 = Member.builder()
+                .name("test2")
+                .build();
+        memberRepository.save(member);
+        memberRepository.save(member2);
+
+        QuerydslNoOffsetStringOptions<Member> options =
+                new QuerydslNoOffsetStringOptions<>(QMember.member.name, Expression.ASC);
+
+        // 데이터 2개니 1개씩만 읽기
+        int chunkSize = 1;
+
+        QuerydslNoOffsetPagingItemReader<Member> reader =
+                new QuerydslNoOffsetPagingItemReader<>(entityManagerFactory, chunkSize, options,
+                        queryFactory -> queryFactory
+                                .selectFrom(QMember.member)
+                                .groupBy(QMember.member.id)
+                                .orderBy(QMember.member.id.asc())
+                );
+
+        reader.open(new ExecutionContext());
+
+        Assert.assertNull(reader.read());
+    }
 }

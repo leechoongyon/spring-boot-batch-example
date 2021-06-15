@@ -17,5 +17,7 @@ spring:
       minimum-idle: 1
       driver-class-name: org.h2.Driver
 
-#lologging:
-#  config: classpath:logback-spring.xml
+logging:
+  level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace

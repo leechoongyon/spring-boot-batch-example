@@ -4,6 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 
@@ -17,7 +18,6 @@ public class Student {
     @Column(name="student_id")
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @GeneratedValue
-
     private Long id;
 
     @Column

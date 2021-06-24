@@ -21,7 +21,7 @@ public class SequenceStrategyBulkInsertBean implements ItemReader<SequenceStrate
     private final SequenceStrategyRepository sequenceStrategyRepository;
 
     // Thread not safe
-    private int readCount = 100;
+    private int readCount = 10000;
 
     private int currentCount = 0;
 

@@ -30,16 +30,15 @@ public class SequenceStrategyRepositoryTest {
 
     @Test
     public void SEQUENCE_방식_성능테스트() throws Exception {
+        long start = System.currentTimeMillis();
         List<SequenceStrategy> list = new ArrayList<>();
-        for (int i = 0 ; i < 100 ; i++) {
+        for (int i = 0 ; i < 10000 ; i++) {
             SequenceStrategy sequenceStrategy =
                     SequenceStrategy.builder().name("test").build();
             list.add(sequenceStrategy);
         }
         List<SequenceStrategy> result = sequenceStrategyRepository.saveAll(list);
-        Assert.assertThat(result.size(), is(100));
-        for (SequenceStrategy strategy : result) {
-            System.out.println(strategy.getId());
-        }
+        Assert.assertThat(result.size(), is(10000));
+        System.out.println("elapsed time : " + (System.currentTimeMillis() - start) );
     }
 }

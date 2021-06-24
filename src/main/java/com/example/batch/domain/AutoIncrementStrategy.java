@@ -13,7 +13,6 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class AutoIncrementStrategy {
     @Id
-
     private Long id;
 
     @Column

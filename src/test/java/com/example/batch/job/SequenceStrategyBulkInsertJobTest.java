@@ -30,9 +30,10 @@ public class SequenceStrategyBulkInsertJobTest {
      */
     @Test
     public void SEQUENCE_생성전략_BULK_INSERT_테스트() throws Exception {
+        long start = System.currentTimeMillis();
         JobExecution jobExecution = jobLauncherTestUtils.launchJob();
         Assert.assertThat(jobExecution.getStatus(),  is(BatchStatus.COMPLETED));
         Assert.assertThat(jobExecution.getExitStatus(),  is(ExitStatus.COMPLETED));
+        System.out.println("elapsed time : " + (System.currentTimeMillis() - start) );
     }
-
 }

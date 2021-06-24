@@ -11,8 +11,8 @@ spring:
     properties:
       hibernate:
         generate_statistics: true
-#        jdbc.batch_size: 100
-#        order_inserts: true
+        jdbc.batch_size: 100
+        order_inserts: true
 
   datasource:
     hikari:

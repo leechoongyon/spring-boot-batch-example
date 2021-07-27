@@ -32,13 +32,15 @@ public class SequenceStrategyRepositoryTest {
     public void SEQUENCE_방식_성능테스트() throws Exception {
         long start = System.currentTimeMillis();
         List<SequenceStrategy> list = new ArrayList<>();
-        for (int i = 0 ; i < 10000 ; i++) {
+        // 테스트 통과가 오래 걸려 횟수 줄임
+//        for (int i = 0 ; i < 10000 ; i++) {
+        for (int i = 0 ; i < 100 ; i++) {
             SequenceStrategy sequenceStrategy =
                     SequenceStrategy.builder().name("test").build();
             list.add(sequenceStrategy);
         }
         List<SequenceStrategy> result = sequenceStrategyRepository.saveAll(list);
-        Assert.assertThat(result.size(), is(10000));
+        Assert.assertThat(result.size(), is(100));
         System.out.println("elapsed time : " + (System.currentTimeMillis() - start) );
     }
 }

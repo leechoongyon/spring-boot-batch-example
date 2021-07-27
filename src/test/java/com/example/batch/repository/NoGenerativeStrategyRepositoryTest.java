@@ -9,6 +9,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.is;
@@ -47,5 +49,22 @@ public class NoGenerativeStrategyRepositoryTest {
 
         // then
         Assert.assertThat(result.get().getName(), is("test"));
+    }
+
+    /**
+     * 생성전략이 없으니 select 한 후, insert 함. 즉, 오래 걸림.
+     * @throws Exception
+     */
+    @Test
+    public void ID생성전략이_없으며_대량SAVE_테스트() throws Exception {
+        List<NoGenerativeStrategy> list = new ArrayList<>();
+        for (int i = 0 ; i < 1000 ; i++) {
+            NoGenerativeStrategy noGenerativeStrategy =
+                    NoGenerativeStrategy.builder()
+                            .id(Long.valueOf(i + 1))
+                            .name("test").build();
+            list.add(noGenerativeStrategy);
+        }
+        noGenerativeStrategyRepository.saveAll(list);
     }
 }

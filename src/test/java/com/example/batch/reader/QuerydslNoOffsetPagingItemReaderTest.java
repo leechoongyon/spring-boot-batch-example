@@ -162,6 +162,6 @@ public class QuerydslNoOffsetPagingItemReaderTest {
 
         reader.open(new ExecutionContext());
 
-        Assert.assertNull(reader.read());
+        Assert.assertNotNull(reader.read());
     }
 }

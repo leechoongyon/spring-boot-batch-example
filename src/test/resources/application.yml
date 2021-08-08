@@ -18,6 +18,7 @@ spring:
 
   datasource:
     hikari:
+      auto-commit: false
       jdbc-url: jdbc:h2:mem:test
 #      jdbc-url: jdbc:h2:tcp://localhost/~/test  # h2 서버 띄워야 함. url 그대로 쳐줘야 접속됨. (h2console 에서)
       username: sa
@@ -26,7 +27,8 @@ spring:
       minimum-idle: 1
       driver-class-name: org.h2.Driver
 
-#logging:
-#  level:
-#    org.hibernate.SQL: debug
-#    org.hibernate.type: trace
+logging:
+  level:
+    root: info
+    org.hibernate.SQL: debug
+    org.hibernate.type: trace

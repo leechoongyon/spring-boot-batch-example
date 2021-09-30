@@ -120,7 +120,6 @@ public class QuerydslPagingItemReaderAsyncTest {
                     Member nextMember = null;
                     do {
                         nextMember = reader.read();
-                        Thread.sleep(10L);
                         logger.debug("item: " + nextMember);
                         if (nextMember != null) {
                             list.add(nextMember);

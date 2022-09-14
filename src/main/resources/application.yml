@@ -24,6 +24,14 @@ spring:
       minimum-idle: 1
       driver-class-name: org.h2.Driver
 
+mybatis:
+  executor-type: batch
+  mapper-locations: classpath:mapper/**/*.xml
+  configuration:
+    lazy-loading-enabled: true
+    aggressive-lazy-loading: false
+    map-underscore-to-camel-case: true
+
 logging:
   level:
     org.hibernate.SQL: debug
